@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions & Allergy Concerns</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ffcccb;
+            color: #333;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Submit Suggestions & Allergy Concerns</h2>
+        <form action="/submit_suggestion/" method="POST">
+            {% csrf_token %}
+            <label for="flavor">Flavor Suggestion</label>
+            <input type="text" id="flavor" name="flavor" placeholder="Suggest a new flavor..." required>
+
+            <label for="allergy">Allergy Concerns</label>
+            <textarea id="allergy" name="allergy" rows="4" placeholder="Share any allergy concerns..."></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

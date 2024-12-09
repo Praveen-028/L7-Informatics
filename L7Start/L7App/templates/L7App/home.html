@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Parlour</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #ffcccb;
+            color: #333;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+        main {
+            display: flex;
+            flex: 1;
+            margin: 20px;
+        }
+        .side-pane {
+            width: 25%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            flex: 1;
+            margin: 0 20px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .ice-cream-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .ice-cream-item:last-child {
+            border-bottom: none;
+        }
+        .ice-cream-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .ice-cream-flavor, .ice-cream-price {
+            font-size: 16px;
+            color: #555;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function filterIceCreams() {
+            const searchValue = document.getElementById("searchInput").value.toLowerCase();
+            const items = document.querySelectorAll(".ice-cream-item");
+
+            items.forEach(item => {
+                const name = item.querySelector(".ice-cream-name").innerText.toLowerCase();
+                if (name.includes(searchValue)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        Ice Cream Parlour
+    </header>
+    <main>
+        <!-- Left Pane -->
+        <div class="side-pane">
+            <h2>Seasonal Flavor Offerings</h2>(Static)
+            <ul>
+                <li>Summer Mango Delight</li>
+                <li>Winter Cinnamon Swirl</li>
+                <li>Autumn Pumpkin Spice</li>
+                <li>Spring Cherry Blossom</li>
+            </ul>
+        </div>
+
+        <!-- Center Content -->
+        <div class="content">
+            <div class="container">
+                <h2>Available Ice Creams</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search ice creams..." oninput="filterIceCreams()">
+                </div>
+                {% if ice_creams %}
+                    {% for ice_cream in ice_creams %}
+                    <div class="ice-cream-item">
+                        <p class="ice-cream-name">ID: {{ ice_cream.id }} - {{ ice_cream.name }}</p>
+                        <p class="ice-cream-flavor">Flavor: {{ ice_cream.flavor }}</p>
+                        <p class="ice-cream-price">Price: ${{ ice_cream.price }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No ice creams available at the moment. Please check back later!</p>
+                {% endif %}
+                <a href="{% url 'suggestions' %}">Submit Suggestions & Allergy Concerns</a>
+            </div>
+        </div>
+
+        <!-- Right Pane -->
+        <div class="side-pane">
+            <h2>Ingredient Inventory</h2>(Static)
+            <ul>
+                <li>Milk: In stock</li>
+                <li>Vanilla Beans: Low stock</li>
+                <li>Strawberries: Fresh and available</li>
+                <li>Chocolate Syrup: Fully stocked</li>
+                <li>Mango Pulp: Out of stock</li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
